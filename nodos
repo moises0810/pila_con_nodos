@@ -1,0 +1,84 @@
+import java.util.Scanner;
+public class menu {
+    public static void main(String[]args){
+        Scanner teclado = new Scanner(System.in);
+        int opc = 0;
+        PilaNodo p = new PilaNodo();
+            do{
+                System.out.println("selecciona una opcion: ");
+                System.out.println("1. ingresar nodo");
+                System.out.println("2. mostrar nodo");
+                System.out.println("3. eliminar nodo");
+                System.out.println("4. salir");
+                opc = teclado.nextInt();
+                switch (opc){
+                    case 1:
+                      p.Nodo();
+                      break;
+                    case 2:
+                      System.out.println("mostrar nodos");
+                        p.mostrar();
+                        break;
+                    case 3:
+                      p.eliminar();
+                        break;
+                    case 4:
+                      System.out.println("salir");
+                    default: 
+                      System.out.println("opcion no valida");
+                }
+            }while (opc != 4);
+    }
+}
+import java.util.Scanner;
+public class PilaNodo {
+    Scanner tec = new Scanner(System.in);
+    nodo prim;
+    public PilaNodo (){
+      prim = null;  
+    }
+    public void Nodo(){
+        nodo nuevo = new nodo();
+        System.out.print("ingresa un dato: ");
+        nuevo.dato = tec.nextInt();
+        nuevo.siguiente = prim;
+        prim = nuevo;
+    }
+    public void mostrar(){
+        nodo act = new nodo();
+        act = prim;
+        if(prim != null){
+            while(act !=null){
+                System.out.println(" "+ act.dato);
+                act = act.siguiente; 
+            }
+        }else{
+            System.out.println("la pila esta vacia");
+        }
+    }
+    public void eliminar(){
+        nodo act = new nodo();
+        act = prim;
+        boolean enc = false;
+        int nodob = tec.nextInt();
+        if(prim != null){
+            while(act != null && enc != true){
+                if(act.dato == nodob){
+                    if(act == prim){
+                    prim = prim.siguiente;
+                }
+                    System.out.println("nodo con el dato "+ act.dato+" encontrado");
+                    enc = true;
+                }
+                act = act.siguiente;
+            }if(!enc){
+                System.out.println("nodo encontrado");
+            }
+        }else{System.out.println("pila vacia");
+                }
+    }
+}
+class nodo {
+    int dato;
+    nodo siguiente;
+}
